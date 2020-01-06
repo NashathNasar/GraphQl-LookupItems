@@ -25,6 +25,11 @@ namespace FirstGrphql.GraphQl
             Field<ListGraphType<ChargingTypeType>>("chargingtypes", resolve: context => repository.GetChargingTypesAsync());
             Field<ListGraphType<DivisionType>>("division", resolve: context => repository.GetDivisionsAsync());
             Field<ListGraphType<InvoicedByType>>("invoicedby", resolve: context => repository.GetInvoicedBysAsync());
+            Field<ListGraphType<PaymentTermType>>("paymentterms", resolve: context => repository.GetPaymentTermsAsync());
+            Field<ListGraphType<ProductGroupType>>("productgroups", resolve: context => repository.GetProductGroupsAsync());
+            Field<ListGraphType<OriginType>>("origins", resolve: context => repository.GetOriginsAsync());
+
+
         }
     }
     public class CustomerType : ObjectGraphType<Customer>
@@ -67,6 +72,35 @@ namespace FirstGrphql.GraphQl
             Field(x => x.InvoicedByName);
         }
     }
+    public class PaymentTermType : ObjectGraphType<PaymentTerm>
+    {
+        public PaymentTermType()
+        {
+            Field(x => x.PaymentTermId);
+            Field(x => x.PaymentTermName);
+        }
+    }
+    public  class ProductGroupType: ObjectGraphType<ProductGroup>
+    {
+        public ProductGroupType()
+        {
+            Field(x => x.ProductGroupId);
+            Field(x => x.ProductGroupName);
+        }
+
+
+    }
+    public class OriginType : ObjectGraphType<Origin>
+    {
+        public OriginType()
+        {
+            Field(x => x.OriginId);
+            Field(x => x.OriginName);
+        }
+    }
+
+
+
     public interface ILookupItem
     {
         int Id { get; set; }

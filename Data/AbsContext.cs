@@ -23,10 +23,11 @@ namespace FirstGrphql.Data
         public DbSet<Division> Divisions { get; set; }
 
         public DbSet<InvoicedBy> InvoicedBy { get; set; }
+        public DbSet<PaymentTerm> PaymentTerms { get; set; }
 
+        public DbSet<ProductGroup> ProductGroups { get; set; }
 
-
-
+        public DbSet<Origin> Origins { get; set; }
     }
 
 
@@ -73,6 +74,36 @@ namespace FirstGrphql.Data
     }
 
 
+    public class PaymentTerm
+    {
 
+        public int PaymentTermId { get; set; }
+
+
+        public string PaymentTermName { get; set; }
+
+
+
+    }
+
+    public class ProductGroup
+    {
+
+
+        public int ProductGroupId { get; set; }
+        public string ProductGroupName { get; set; }
+
+
+    }
+
+    public class Origin
+    {
+
+        public int OriginId { get; set; }
+
+        public string OriginName { get; set; }
+
+        public string OriginCode { get; set; }
+    }
 
 }

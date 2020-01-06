@@ -15,6 +15,12 @@ namespace FirstGrphql
 
         Task<List<Division>> GetDivisionsAsync();
         Task<List<InvoicedBy>> GetInvoicedBysAsync();
+        Task<List<PaymentTerm>> GetPaymentTermsAsync();
+
+        Task<List<ProductGroup>> GetProductGroupsAsync();
+
+
+        Task<List<Origin>> GetOriginsAsync();
     }
 
     public class CustomerRepository : ILookupItemRepository
@@ -44,6 +50,21 @@ namespace FirstGrphql
         public Task<List<InvoicedBy>> GetInvoicedBysAsync()
         {
             return _context.InvoicedBy.ToListAsync();
+        }
+
+        public Task<List<PaymentTerm>> GetPaymentTermsAsync()
+        {
+            return _context.PaymentTerms.ToListAsync();
+        }
+
+        public Task<List<ProductGroup>> GetProductGroupsAsync()
+        {
+            return _context.ProductGroups.ToListAsync();
+        }
+
+        public Task<List<Origin>> GetOriginsAsync()
+        {
+            return _context.Origins.ToListAsync();
         }
     }
 
