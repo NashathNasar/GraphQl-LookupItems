@@ -28,7 +28,8 @@ namespace FirstGrphql.GraphQl
             Field<ListGraphType<PaymentTermType>>("paymentterms", resolve: context => repository.GetPaymentTermsAsync());
             Field<ListGraphType<ProductGroupType>>("productgroups", resolve: context => repository.GetProductGroupsAsync());
             Field<ListGraphType<OriginType>>("origins", resolve: context => repository.GetOriginsAsync());
-
+            Field<ListGraphType<ProductUnitType>>("productunits", resolve: context => repository.GetProductUnitsAsync());
+            Field<ListGraphType<DeliveryMovementType>>("deliverymovementtypes", resolve: context => repository.GetDeliveryMovementTypesAsync());
 
         }
     }
@@ -99,6 +100,28 @@ namespace FirstGrphql.GraphQl
         }
     }
 
+    public class ProductUnitType: ObjectGraphType<ProductUnit>
+    {
+        public ProductUnitType()
+        {
+            Field(x => x.UnitId);
+            Field(x => x.Unit)
+;        }
+    }
+
+    public class DeliveryMovementType: ObjectGraphType<DeliveryMovementsType>
+    {
+
+        public DeliveryMovementType()
+        {
+            Field(x => x.MovementTypeId);
+            Field(x => x.MovementType);
+
+        }
+
+
+
+    }
 
 
     public interface ILookupItem

@@ -19,8 +19,10 @@ namespace FirstGrphql
 
         Task<List<ProductGroup>> GetProductGroupsAsync();
 
-
+        Task<List<ProductUnit>> GetProductUnitsAsync();
         Task<List<Origin>> GetOriginsAsync();
+
+        Task<List<DeliveryMovementsType>> GetDeliveryMovementTypesAsync();
     }
 
     public class CustomerRepository : ILookupItemRepository
@@ -65,6 +67,16 @@ namespace FirstGrphql
         public Task<List<Origin>> GetOriginsAsync()
         {
             return _context.Origins.ToListAsync();
+        }
+
+        public Task<List<ProductUnit>> GetProductUnitsAsync()
+        {
+            return _context.ProductUnits.ToListAsync();
+        }
+
+        public Task<List<DeliveryMovementsType>> GetDeliveryMovementTypesAsync()
+        {
+            return _context.DeliveryMovementTypes.ToListAsync();
         }
     }
 

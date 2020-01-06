@@ -27,7 +27,24 @@ namespace FirstGrphql.Data
 
         public DbSet<ProductGroup> ProductGroups { get; set; }
 
+        public DbSet<ProductUnit> ProductUnits { get; set; }
         public DbSet<Origin> Origins { get; set; }
+
+        public DbSet<DeliveryMovementsType> DeliveryMovementTypes { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DeliveryMovementsType>(entity =>
+            {
+                entity.HasKey(x => x.MovementTypeId);
+            });
+
+
+
+            modelBuilder.Entity<ProductUnit>(entity=> 
+            {
+                entity.HasKey(x => x.UnitId);
+            });
+        }
     }
 
 
@@ -96,6 +113,22 @@ namespace FirstGrphql.Data
 
     }
 
+    public class DeliveryMovementsType
+    {
+
+
+        public int MovementTypeId { get; set; }
+
+        public string MovementType { get; set; }
+
+    }
+
+
+    public class ProductUnit
+    {
+        public int UnitId { get; set; }
+        public string Unit { get; set; }
+    }
     public class Origin
     {
 
