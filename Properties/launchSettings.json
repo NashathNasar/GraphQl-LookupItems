@@ -1,0 +1,30 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:51541",
+      "sslPort": 44351
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ConnectionStrings:AbsCore": "Data Source=192.168.30.26; Initial Catalog=ABS_CBF2; User Id=sa;pwd=fkt",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "FirstGrphql": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "ui/playground",
+      "environmentVariables": {
+        "ConnectionStrings:AbsCore": "Data Source=192.168.30.26; Initial Catalog=ABS_CBF2; User Id=sa;pwd=fkt",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:51541"
+    }
+  }
+}
