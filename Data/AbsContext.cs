@@ -29,6 +29,8 @@ namespace FirstGrphql.Data
 
         public DbSet<ProductCategory> ProductCategories { get; set; }
 
+        public DbSet<Product> Products { get; set; }
+
         public DbSet<ProductUnit> ProductUnits { get; set; }
         public DbSet<Origin> Origins { get; set; }
 
@@ -166,7 +168,13 @@ namespace FirstGrphql.Data
 
     }
 
+    public class Product
+    {
+      public int ProductId { get; set; }
+      public string ProductName { get; set; }
+      public int CategoryId { get; set; }
 
+    }
 
 
 

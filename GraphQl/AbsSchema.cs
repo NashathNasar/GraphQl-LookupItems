@@ -43,6 +43,16 @@ namespace FirstGrphql.GraphQl
                     var productgroupId = context.GetArgument<int>("ProductGroupId");
                     return repository.GetProductCategoriesAsync(productgroupId);
                 });
+
+            Field<ListGraphType<ProductType>>("products", resolve: context => repository.GetProductsAsync());
+            Field<ListGraphType<ProductType>>("productbycategories",
+                 arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "CategoryId" }),
+                resolve: context =>
+                {
+                    var categoryId = context.GetArgument<int>("CategoryId");
+                    return repository.GetProductsAsync(categoryId);
+                });
+
             Field<ListGraphType<ProjectType>>("projects", resolve: context => repository.GetProjectsAsync());
             Field<ListGraphType<ProjectType>>("projectsbycustomer",
                 arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "CustomerId" }),
@@ -97,6 +107,19 @@ namespace FirstGrphql.GraphQl
                 base.Field(x => x.ProductGroupId);
 
             }
+        }
+
+        public class ProductType: ObjectGraphType<Product>
+        {
+
+            public ProductType()
+            {
+                base.Field(x => x.ProductId);
+                base.Field(x => x.ProductName);
+                base.Field(x => x.CategoryId);
+            }
+
+
         }
 
         public class ChargingTypeType : ObjectGraphType<ChargingType>
