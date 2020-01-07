@@ -27,6 +27,8 @@ namespace FirstGrphql.Data
 
         public DbSet<ProductGroup> ProductGroups { get; set; }
 
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+
         public DbSet<ProductUnit> ProductUnits { get; set; }
         public DbSet<Origin> Origins { get; set; }
 
@@ -37,6 +39,9 @@ namespace FirstGrphql.Data
         public DbSet<DeliveryType> DeliveryTypes { get; set; }
 
         public DbSet<InvoicesType> InvoiceTypes { get; set; }
+
+
+        public DbSet<OrderApprover> OrderApprovers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DeliveryMovementsType>(entity =>
@@ -49,6 +54,18 @@ namespace FirstGrphql.Data
             {
                 entity.HasKey(x => x.InvoiceTypeId);
 
+            });
+
+            modelBuilder.Entity<OrderApprover>(entity =>
+            {
+                entity.HasKey(x => x.ApprovedById);
+            });
+
+            modelBuilder.Entity<ProductCategory>(entity =>
+            {
+
+                entity.HasKey(x => x.CategoryId);            
+            
             });
 
             modelBuilder.Entity<Project>(entity =>
@@ -71,6 +88,7 @@ namespace FirstGrphql.Data
 
     }
 
+
     public class Project
     {
         public int ProjectId { get; set; }
@@ -80,7 +98,6 @@ namespace FirstGrphql.Data
         public string ProjectName { get; set; }
 
     }
-
     public class ChargingType
     {
 
@@ -139,6 +156,20 @@ namespace FirstGrphql.Data
 
     }
 
+    public class ProductCategory
+    {
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
+
+
+        public int ProductGroupId { get; set; }
+
+    }
+
+
+
+
+
     public class DeliveryMovementsType
     {
 
@@ -183,5 +214,11 @@ namespace FirstGrphql.Data
         public string InvoiceType { get; set; }
     }
 
+    public class OrderApprover
+    {
+        public int ApprovedById { get; set; }
+        public string ApprovedBy { get; set; }
+
+    }
 
 }

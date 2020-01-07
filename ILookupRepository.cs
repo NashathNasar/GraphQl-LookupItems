@@ -22,6 +22,10 @@ namespace FirstGrphql
         Task<List<ProductUnit>> GetProductUnitsAsync();
         Task<List<Origin>> GetOriginsAsync();
 
+        Task<List<OrderApprover>> GetOrderApproversAsync();
+
+        Task<List<ProductCategory>> GetProductCategoriesAsync(int ProductGroupId=0);
+
         Task<List<DeliveryMovementsType>> GetDeliveryMovementTypesAsync();
         Task<List<DeliveryType>> GetDeliveryTypesAsync(int MovementTypeId=0);
 
@@ -96,9 +100,6 @@ namespace FirstGrphql
         }
 
         public Task<List<DeliveryType>> GetDeliveryTypesAsync(int movementtypeId = 0)
-
-
-
         {
             if (movementtypeId > 0)
             {
@@ -112,6 +113,22 @@ namespace FirstGrphql
         public Task<List<InvoicesType>> GetInvoicesTypesAsync()
         {
             return _context.InvoiceTypes.ToListAsync();
+        }
+
+        public Task<List<OrderApprover>> GetOrderApproversAsync()
+        {
+            return _context.OrderApprovers.ToListAsync();
+        }
+
+        public Task<List<ProductCategory>> GetProductCategoriesAsync(int productgroupId = 0)
+        {
+            if (productgroupId > 0)
+            {
+                return _context.ProductCategories
+                    .Where(x => x.ProductGroupId == productgroupId)
+                    .ToListAsync();
+            }
+            return _context.ProductCategories.ToListAsync();
         }
     }
 

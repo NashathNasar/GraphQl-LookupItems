@@ -30,8 +30,19 @@ namespace FirstGrphql.GraphQl
             Field<ListGraphType<PaymentTermType>>("paymentterms", resolve: context => repository.GetPaymentTermsAsync());
             Field<ListGraphType<ProductGroupType>>("productgroups", resolve: context => repository.GetProductGroupsAsync());
             Field<ListGraphType<OriginType>>("origins", resolve: context => repository.GetOriginsAsync());
+            Field<ListGraphType<OrderApproverType>>("orderapprover", resolve: context => repository.GetOrderApproversAsync());
             Field<ListGraphType<ProductUnitType>>("productunits", resolve: context => repository.GetProductUnitsAsync());
+
+
             Field<ListGraphType<DeliveryMovementType>>("deliverymovementtypes", resolve: context => repository.GetDeliveryMovementTypesAsync());
+            Field<ListGraphType<ProductCategoryType>>("productcategories", resolve: context => repository.GetProductCategoriesAsync());
+            Field<ListGraphType<ProductCategoryType>>("productcategoriesbygroup",
+                 arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "ProductGroupId" }),
+                resolve: context =>
+                {
+                    var productgroupId = context.GetArgument<int>("ProductGroupId");
+                    return repository.GetProductCategoriesAsync(productgroupId);
+                });
             Field<ListGraphType<ProjectType>>("projects", resolve: context => repository.GetProjectsAsync());
             Field<ListGraphType<ProjectType>>("projectsbycustomer",
                 arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "CustomerId" }),
@@ -73,6 +84,17 @@ namespace FirstGrphql.GraphQl
                 base.Field(x => x.ProjectId);
                 base.Field(x => x.ProjectName);
                 base.Field(x => x.CustomerId);
+
+            }
+        }
+
+        public class ProductCategoryType: ObjectGraphType<ProductCategory>
+        {
+            public ProductCategoryType()
+            {
+                base.Field(x => x.CategoryId);
+                base.Field(x => x.CategoryName);
+                base.Field(x => x.ProductGroupId);
 
             }
         }
@@ -171,6 +193,15 @@ namespace FirstGrphql.GraphQl
 
 
 
+        }
+
+        public class OrderApproverType: ObjectGraphType<OrderApprover>
+        {
+            public OrderApproverType()
+            {
+                base.Field(x => x.ApprovedById);
+                base.Field(x => x.ApprovedBy);
+            }
         }
 
         public class DeliveryTypeType : ObjectGraphType<DeliveryType>
