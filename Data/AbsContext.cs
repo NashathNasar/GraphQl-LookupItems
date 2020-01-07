@@ -30,7 +30,13 @@ namespace FirstGrphql.Data
         public DbSet<ProductUnit> ProductUnits { get; set; }
         public DbSet<Origin> Origins { get; set; }
 
+        public DbSet<Project> Projects { get; set; }
+
         public DbSet<DeliveryMovementsType> DeliveryMovementTypes { get; set; }
+
+        public DbSet<DeliveryType> DeliveryTypes { get; set; }
+
+        public DbSet<InvoicesType> InvoiceTypes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DeliveryMovementsType>(entity =>
@@ -38,7 +44,17 @@ namespace FirstGrphql.Data
                 entity.HasKey(x => x.MovementTypeId);
             });
 
+            modelBuilder.Entity<InvoicesType>(entity =>
 
+            {
+                entity.HasKey(x => x.InvoiceTypeId);
+
+            });
+
+            modelBuilder.Entity<Project>(entity =>
+            {
+                entity.HasKey(x => x.ProjectId);
+            });
 
             modelBuilder.Entity<ProductUnit>(entity=> 
             {
@@ -52,6 +68,16 @@ namespace FirstGrphql.Data
     {
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
+
+    }
+
+    public class Project
+    {
+        public int ProjectId { get; set; }
+
+        public int CustomerId { get; set; }
+
+        public string ProjectName { get; set; }
 
     }
 
@@ -123,6 +149,16 @@ namespace FirstGrphql.Data
 
     }
 
+    public class DeliveryType
+    {
+        public int DeliveryTypeId { get; set; }
+
+        public string DeliveryTypeName { get; set; }
+
+        public int MovementTypeId { get; set; }
+
+
+    }
 
     public class ProductUnit
     {
@@ -138,5 +174,14 @@ namespace FirstGrphql.Data
 
         public string OriginCode { get; set; }
     }
+
+    public class InvoicesType
+    {
+
+
+        public int InvoiceTypeId { get; set; }
+        public string InvoiceType { get; set; }
+    }
+
 
 }

@@ -23,6 +23,11 @@ namespace FirstGrphql
         Task<List<Origin>> GetOriginsAsync();
 
         Task<List<DeliveryMovementsType>> GetDeliveryMovementTypesAsync();
+        Task<List<DeliveryType>> GetDeliveryTypesAsync(int MovementTypeId=0);
+
+        Task<List<Project>> GetProjectsAsync(int CustomerId=0);
+
+        Task<List<InvoicesType>> GetInvoicesTypesAsync();
     }
 
     public class CustomerRepository : ILookupItemRepository
@@ -77,6 +82,36 @@ namespace FirstGrphql
         public Task<List<DeliveryMovementsType>> GetDeliveryMovementTypesAsync()
         {
             return _context.DeliveryMovementTypes.ToListAsync();
+        }
+
+        public Task<List<Project>> GetProjectsAsync(int customerId=0)
+        {
+            if (customerId > 0)
+            {
+                return _context.Projects
+                    .Where(x => x.CustomerId == customerId)
+                    .ToListAsync();
+            }
+            return _context.Projects.ToListAsync();
+        }
+
+        public Task<List<DeliveryType>> GetDeliveryTypesAsync(int movementtypeId = 0)
+
+
+
+        {
+            if (movementtypeId > 0)
+            {
+                return _context.DeliveryTypes
+                    .Where(x => x.MovementTypeId== movementtypeId)
+                    .ToListAsync();
+            }
+            return _context.DeliveryTypes.ToListAsync();
+        }
+
+        public Task<List<InvoicesType>> GetInvoicesTypesAsync()
+        {
+            return _context.InvoiceTypes.ToListAsync();
         }
     }
 
