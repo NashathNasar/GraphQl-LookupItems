@@ -38,7 +38,11 @@ namespace FirstGrphql.Data
 
         public DbSet<DeliveryMovementsType> DeliveryMovementTypes { get; set; }
 
+
+        public DbSet<ReceiptsMovementType> ReceiptMovementTypes { get; set; }
         public DbSet<DeliveryType> DeliveryTypes { get; set; }
+
+        public DbSet<ReceiptsType> ReceiptTypes { get; set; }
 
         public DbSet<InvoicesType> InvoiceTypes { get; set; }
 
@@ -51,13 +55,20 @@ namespace FirstGrphql.Data
                 entity.HasKey(x => x.MovementTypeId);
             });
 
+            modelBuilder.Entity<ReceiptsMovementType>(entity =>
+            {
+                entity.HasKey(x => x.MovementTypeId);
+            });
             modelBuilder.Entity<InvoicesType>(entity =>
 
             {
                 entity.HasKey(x => x.InvoiceTypeId);
 
             });
-
+            modelBuilder.Entity<ReceiptsType>(entity =>
+            {
+                entity.HasKey(x => x.ReceiptTypeId);
+            });
             modelBuilder.Entity<OrderApprover>(entity =>
             {
                 entity.HasKey(x => x.ApprovedById);
@@ -176,8 +187,6 @@ namespace FirstGrphql.Data
 
     }
 
-
-
     public class DeliveryMovementsType
     {
 
@@ -186,6 +195,22 @@ namespace FirstGrphql.Data
 
         public string MovementType { get; set; }
 
+    }
+
+
+    public class ReceiptsMovementType
+    {
+        public int MovementTypeId { get; set; }
+
+        public string MovementType { get; set; }
+    }
+
+    public class ReceiptsType
+    {
+
+        public int ReceiptTypeId { get; set; }
+        public string ReceiptTypeName { get; set; }
+        public int MovementTypeId { get; set; }
     }
 
     public class DeliveryType

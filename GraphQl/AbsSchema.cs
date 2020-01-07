@@ -32,7 +32,7 @@ namespace FirstGrphql.GraphQl
             Field<ListGraphType<OriginType>>("origins", resolve: context => repository.GetOriginsAsync());
             Field<ListGraphType<OrderApproverType>>("orderapprover", resolve: context => repository.GetOrderApproversAsync());
             Field<ListGraphType<ProductUnitType>>("productunits", resolve: context => repository.GetProductUnitsAsync());
-
+            Field<ListGraphType<ReceiptMovementType>>("receiptmovementtypes", resolve: context => repository.GetReceiptsMovementTypesAsync());
 
             Field<ListGraphType<DeliveryMovementType>>("deliverymovementtypes", resolve: context => repository.GetDeliveryMovementTypesAsync());
             Field<ListGraphType<ProductCategoryType>>("productcategories", resolve: context => repository.GetProductCategoriesAsync());
@@ -74,7 +74,17 @@ namespace FirstGrphql.GraphQl
 
             });
 
+            Field<ListGraphType<ReceiptType>>("receipttypes",
+           arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "MovementTypeId" }),
+           resolve: context =>
+           {
 
+               var movementtypeId = context.GetArgument<int>("MovementTypeId");
+
+               return repository.GetReceiptsTypesAsync(movementtypeId);
+
+
+           });
 
         }
         public class CustomerType : ObjectGraphType<Customer>
@@ -218,6 +228,14 @@ namespace FirstGrphql.GraphQl
 
         }
 
+        public class ReceiptMovementType: ObjectGraphType<ReceiptsMovementType>
+        {
+            public ReceiptMovementType()
+            {
+                base.Field(x => x.MovementTypeId);
+                base.Field(x => x.MovementType);
+            }
+        }
         public class OrderApproverType: ObjectGraphType<OrderApprover>
         {
             public OrderApproverType()
@@ -240,6 +258,19 @@ namespace FirstGrphql.GraphQl
 
 
 
+        }
+
+        public class ReceiptType :ObjectGraphType<ReceiptsType>
+        {
+
+            public ReceiptType()
+            {
+
+                base.Field(x => x.ReceiptTypeId);
+                base.Field(x => x.ReceiptTypeName);
+                base.Field(x => x.MovementTypeId);
+
+            }
         }
         public interface ILookupItem
         {
