@@ -44,6 +44,7 @@ namespace FirstGrphql.Data
 
         public DbSet<ReceiptsType> ReceiptTypes { get; set; }
 
+        public DbSet<ReceivedDivison> ReceivedDivisions { get; set; }
         public DbSet<InvoicesType> InvoiceTypes { get; set; }
 
 
@@ -54,6 +55,13 @@ namespace FirstGrphql.Data
             {
                 entity.HasKey(x => x.MovementTypeId);
             });
+
+            modelBuilder.Entity<ReceivedDivison>(entity =>
+            {
+                entity.HasKey(x => x.ReceivedById);
+            });
+
+
 
             modelBuilder.Entity<ReceiptsMovementType>(entity =>
             {
@@ -252,6 +260,14 @@ namespace FirstGrphql.Data
         public int ApprovedById { get; set; }
         public string ApprovedBy { get; set; }
 
+    }
+
+    public class ReceivedDivison
+    {
+        public int ReceivedById { get; set; }
+
+
+        public string ReceivedBy { get; set; }
     }
 
 }

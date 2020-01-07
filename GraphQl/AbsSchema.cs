@@ -33,7 +33,7 @@ namespace FirstGrphql.GraphQl
             Field<ListGraphType<OrderApproverType>>("orderapprover", resolve: context => repository.GetOrderApproversAsync());
             Field<ListGraphType<ProductUnitType>>("productunits", resolve: context => repository.GetProductUnitsAsync());
             Field<ListGraphType<ReceiptMovementType>>("receiptmovementtypes", resolve: context => repository.GetReceiptsMovementTypesAsync());
-
+            Field<ListGraphType<ReceivedDivisionType>>("receiveddivisions", resolve: context => repository.GetReceivedDivisonsAsync());
             Field<ListGraphType<DeliveryMovementType>>("deliverymovementtypes", resolve: context => repository.GetDeliveryMovementTypesAsync());
             Field<ListGraphType<ProductCategoryType>>("productcategories", resolve: context => repository.GetProductCategoriesAsync());
             Field<ListGraphType<ProductCategoryType>>("productcategoriesbygroup",
@@ -271,6 +271,25 @@ namespace FirstGrphql.GraphQl
                 base.Field(x => x.MovementTypeId);
 
             }
+        }
+
+
+        public class ReceivedDivisionType: ObjectGraphType<ReceivedDivison>
+        {
+
+
+            public ReceivedDivisionType()
+            {
+
+                base.Field(x => x.ReceivedById);
+                base.Field(x => x.ReceivedBy);
+            }
+
+
+
+
+
+
         }
         public interface ILookupItem
         {
