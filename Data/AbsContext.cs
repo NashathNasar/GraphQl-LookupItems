@@ -31,6 +31,8 @@ namespace FirstGrphql.Data
 
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<Supplier> Suppliers { get; set; }
+
         public DbSet<ProductUnit> ProductUnits { get; set; }
         public DbSet<Origin> Origins { get; set; }
 
@@ -45,6 +47,8 @@ namespace FirstGrphql.Data
         public DbSet<ReceiptsType> ReceiptTypes { get; set; }
 
         public DbSet<ReceivedDivison> ReceivedDivisions { get; set; }
+
+        public DbSet<SuppliedDivision> SuppliedDivisions { get; set; }
         public DbSet<InvoicesType> InvoiceTypes { get; set; }
 
         public DbSet<SalesOrder> SalesOrders { get; set; }
@@ -90,7 +94,10 @@ namespace FirstGrphql.Data
                 entity.HasKey(x => x.CategoryId);            
             
             });
-
+            modelBuilder.Entity<SuppliedDivision>(entity =>
+            {
+                entity.HasKey(x => x.SuppliedById);
+            });
             modelBuilder.Entity<Project>(entity =>
             {
                 entity.HasKey(x => x.ProjectId);
@@ -293,5 +300,21 @@ namespace FirstGrphql.Data
         public int SalesOrderId { get; set; }
 
     }
+
+    public class SuppliedDivision
+    {
+        public int SuppliedById { get; set; }
+        public string SuppliedBy { get; set; }
+    }
+
+    public class Supplier
+    {
+
+        public int SupplierId { get; set; }
+
+        public string SupplierName { get; set; }
+    }
+
+
 
 }

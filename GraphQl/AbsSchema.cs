@@ -25,7 +25,9 @@ namespace FirstGrphql.GraphQl
             Field<ListGraphType<CustomerType>>("customers", resolve: context => repository.GetCustomersAsync());
             Field<ListGraphType<ChargingTypeType>>("chargingtypes", resolve: context => repository.GetChargingTypesAsync());
             Field<ListGraphType<DivisionType>>("division", resolve: context => repository.GetDivisionsAsync());
+            Field<ListGraphType<SuppliedDivisionType>>("suppliedbydivison", resolve: context => repository.GetSuppliedDivisionsAsyn());
             Field<ListGraphType<InvoicedByType>>("invoicedby", resolve: context => repository.GetInvoicedBysAsync());
+            Field<ListGraphType<SupplierType>>("suppliers", resolve: context => repository.GetSuppliersAsync());
             Field<ListGraphType<InvoiceType>>("invoicetype", resolve: context => repository.GetInvoicesTypesAsync());
             Field<ListGraphType<PaymentTermType>>("paymentterms", resolve: context => repository.GetPaymentTermsAsync());
             Field<ListGraphType<ProductGroupType>>("productgroups", resolve: context => repository.GetProductGroupsAsync());
@@ -133,6 +135,26 @@ namespace FirstGrphql.GraphQl
             }
         }
 
+        public class SuppliedDivisionType: ObjectGraphType<SuppliedDivision>
+        {
+            public SuppliedDivisionType()
+            {
+                base.Field(x => x.SuppliedById);
+                base.Field(x => x.SuppliedBy);
+
+            }
+
+
+        }
+
+        public class SupplierType: ObjectGraphType<Supplier>
+        {
+            public SupplierType()
+            {
+                base.Field(x => x.SupplierId);
+                base.Field(x => x.SupplierName);
+            }
+        }
         public class ProductType: ObjectGraphType<Product>
         {
 
