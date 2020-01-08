@@ -73,7 +73,21 @@ namespace FirstGrphql.GraphQl
 
 
             });
+            Field<ListGraphType<SubOrderType>>("suborders",
+                arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "SalesOrderID" }),
+                resolve: context =>
+                {
+                    var salesorderId = context.GetArgument<int>("SalesOrdrId");
+                    return repository.GetSubOrdersAsync(salesorderId);
 
+                });
+            Field<ListGraphType<SalesOrderType>>("salesordertypes",
+              arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "CustomerId" }),
+              resolve: context =>
+              {
+                  var customerId = context.GetArgument<int>("CustomerId");
+                  return repository.GetSalesOrdersAsync(customerId);
+              });
             Field<ListGraphType<ReceiptType>>("receipttypes",
            arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "MovementTypeId" }),
            resolve: context =>
@@ -290,6 +304,34 @@ namespace FirstGrphql.GraphQl
 
 
 
+        }
+        public class SalesOrderType : ObjectGraphType<SalesOrder>
+        {
+            public SalesOrderType()
+            {
+
+                base.Field(x => x.SalesOrderId);
+                base.Field(x => x.OurOrderRef);
+                base.Field(x => x.CustomerId);
+
+
+
+
+
+
+            }
+
+
+        }
+        public class SubOrderType: ObjectGraphType<SubOrder>
+        {
+            public SubOrderType()
+            {
+                base.Field(x => x.SubOrderId);
+                base.Field(x => x.Reference);
+                base.Field(x => x.SalesOrderId);
+
+            }
         }
         public interface ILookupItem
         {

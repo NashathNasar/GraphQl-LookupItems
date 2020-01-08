@@ -47,7 +47,9 @@ namespace FirstGrphql.Data
         public DbSet<ReceivedDivison> ReceivedDivisions { get; set; }
         public DbSet<InvoicesType> InvoiceTypes { get; set; }
 
+        public DbSet<SalesOrder> SalesOrders { get; set; }
 
+        public DbSet<SubOrder> SubOrders { get; set; }
         public DbSet<OrderApprover> OrderApprovers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -268,6 +270,28 @@ namespace FirstGrphql.Data
 
 
         public string ReceivedBy { get; set; }
+    }
+
+
+    public class SalesOrder
+    {
+
+        public int SalesOrderId { get; set; }
+
+        public string OurOrderRef { get; set; }
+
+        public int CustomerId { get; set; }
+    }
+
+    public class SubOrder
+    {
+        public int SubOrderId { get; set; }
+
+        public string Reference { get; set; }
+
+
+        public int SalesOrderId { get; set; }
+
     }
 
 }
