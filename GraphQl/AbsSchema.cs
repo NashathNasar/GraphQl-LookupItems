@@ -107,8 +107,8 @@ namespace FirstGrphql.GraphQl
         {
             public CustomerType()
             {
-                base.Field(x => x.CustomerId);
-                base.Field(x => x.CustomerName);
+                base.Field(x => x.Id);
+                base.Field(x => x.Name);
             }
         }
 
@@ -117,13 +117,23 @@ namespace FirstGrphql.GraphQl
             public ProjectType()
             {
 
-                base.Field(x => x.ProjectId);
-                base.Field(x => x.ProjectName);
+                base.Field(x => x.Id);
+                base.Field(x => x.Name);
                 base.Field(x => x.CustomerId);
 
             }
         }
+        public class SalesOrderType : ObjectGraphType<SalesOrder>
+        {
+            public SalesOrderType()
+            {
 
+                base.Field(x => x.Id);
+                base.Field(x => x.Name);
+                base.Field(x => x.CustomerId);
+
+            }
+        }
         public class ProductCategoryType: ObjectGraphType<ProductCategory>
         {
             public ProductCategoryType()
@@ -327,24 +337,7 @@ namespace FirstGrphql.GraphQl
 
 
         }
-        public class SalesOrderType : ObjectGraphType<SalesOrder>
-        {
-            public SalesOrderType()
-            {
-
-                base.Field(x => x.SalesOrderId);
-                base.Field(x => x.OurOrderRef);
-                base.Field(x => x.CustomerId);
-
-
-
-
-
-
-            }
-
-
-        }
+       
         public class SubOrderType: ObjectGraphType<SubOrder>
         {
             public SubOrderType()

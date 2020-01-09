@@ -16,43 +16,26 @@ namespace FirstGrphql.Data
         {
 
         }
-
         public DbSet<Customer> Customers{ get; set; }
         public DbSet<ChargingType> ChargingTypes { get; set; }
-
         public DbSet<Division> Divisions { get; set; }
-
         public DbSet<InvoicedBy> InvoicedBy { get; set; }
         public DbSet<PaymentTerm> PaymentTerms { get; set; }
-
         public DbSet<ProductGroup> ProductGroups { get; set; }
-
         public DbSet<ProductCategory> ProductCategories { get; set; }
-
         public DbSet<Product> Products { get; set; }
-
         public DbSet<Supplier> Suppliers { get; set; }
-
         public DbSet<ProductUnit> ProductUnits { get; set; }
         public DbSet<Origin> Origins { get; set; }
-
         public DbSet<Project> Projects { get; set; }
-
         public DbSet<DeliveryMovementsType> DeliveryMovementTypes { get; set; }
-
-
         public DbSet<ReceiptsMovementType> ReceiptMovementTypes { get; set; }
         public DbSet<DeliveryType> DeliveryTypes { get; set; }
-
         public DbSet<ReceiptsType> ReceiptTypes { get; set; }
-
         public DbSet<ReceivedDivison> ReceivedDivisions { get; set; }
-
         public DbSet<SuppliedDivision> SuppliedDivisions { get; set; }
         public DbSet<InvoicesType> InvoiceTypes { get; set; }
-
         public DbSet<SalesOrder> SalesOrders { get; set; }
-
         public DbSet<SubOrder> SubOrders { get; set; }
         public DbSet<OrderApprover> OrderApprovers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -62,22 +45,32 @@ namespace FirstGrphql.Data
                 entity.HasKey(x => x.MovementTypeId);
             });
 
+            modelBuilder.Entity<Customer>(entity => 
+            {
+                entity.HasKey(x => x.Id);
+                entity.Property(x => x.Id).HasColumnName("CustomerId");
+                entity.Property(x => x.Name).HasColumnName("CustomerName");
+            });
+
+            modelBuilder.Entity<SalesOrder>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+                entity.Property(x => x.Id).HasColumnName("SalesOrderId");
+                entity.Property(x => x.Name).HasColumnName("OurOrderRef");
+
+            });
+
             modelBuilder.Entity<ReceivedDivison>(entity =>
             {
                 entity.HasKey(x => x.ReceivedById);
             });
-
-
-
             modelBuilder.Entity<ReceiptsMovementType>(entity =>
             {
                 entity.HasKey(x => x.MovementTypeId);
             });
             modelBuilder.Entity<InvoicesType>(entity =>
-
             {
                 entity.HasKey(x => x.InvoiceTypeId);
-
             });
             modelBuilder.Entity<ReceiptsType>(entity =>
             {
@@ -87,12 +80,9 @@ namespace FirstGrphql.Data
             {
                 entity.HasKey(x => x.ApprovedById);
             });
-
             modelBuilder.Entity<ProductCategory>(entity =>
             {
-
                 entity.HasKey(x => x.CategoryId);            
-            
             });
             modelBuilder.Entity<SuppliedDivision>(entity =>
             {
@@ -100,9 +90,11 @@ namespace FirstGrphql.Data
             });
             modelBuilder.Entity<Project>(entity =>
             {
-                entity.HasKey(x => x.ProjectId);
+                entity.HasKey(x => x.Id);
+                entity.Property(x => x.Id).HasColumnName("ProjectId");
+                entity.Property(x => x.Name).HasColumnName("ProjectName");
+                entity.Property(x => x.CustomerId).HasColumnName("CustomerId");
             });
-
             modelBuilder.Entity<ProductUnit>(entity=> 
             {
                 entity.HasKey(x => x.UnitId);
@@ -110,22 +102,22 @@ namespace FirstGrphql.Data
         }
     }
 
-
+    #region Customers
     public class Customer
     {
-        public int CustomerId { get; set; }
-        public string CustomerName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
 
     }
 
-
+    #endregion
     public class Project
     {
-        public int ProjectId { get; set; }
+        public int Id { get; set; }
 
         public int CustomerId { get; set; }
 
-        public string ProjectName { get; set; }
+        public string Name { get; set; }
 
     }
     public class ChargingType
@@ -279,16 +271,18 @@ namespace FirstGrphql.Data
         public string ReceivedBy { get; set; }
     }
 
-
+    #region SalesOrders
     public class SalesOrder
     {
 
-        public int SalesOrderId { get; set; }
+        public int Id { get; set; }
 
-        public string OurOrderRef { get; set; }
+        public string Name { get; set; }
 
         public int CustomerId { get; set; }
     }
+
+    #endregion
 
     public class SubOrder
     {
