@@ -39,7 +39,7 @@ namespace FirstGrphql.GraphQl
             Field<ListGraphType<DeliveryMovementType>>("deliverymovementtypes", resolve: context => repository.GetDeliveryMovementTypesAsync());
             Field<ListGraphType<ProductCategoryType>>("productcategories", resolve: context => repository.GetProductCategoriesAsync());
             Field<ListGraphType<ProductCategoryType>>("productcategoriesbygroup",
-                 arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "ProductGroupId" }),
+               arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "ProductGroupId" }),
                 resolve: context =>
                 {
                     var productgroupId = context.GetArgument<int>("ProductGroupId");
@@ -73,13 +73,12 @@ namespace FirstGrphql.GraphQl
 
                 return repository.GetDeliveryTypesAsync(movementtypeId);
 
-
             });
             Field<ListGraphType<SubOrderType>>("suborders",
-                arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "SalesOrderID" }),
+                arguments: new QueryArguments(new QueryArgument<IntGraphType> { Name = "SalesOrderId" }),
                 resolve: context =>
                 {
-                    var salesorderId = context.GetArgument<int>("SalesOrdrId");
+                    var salesorderId = context.GetArgument<int>("SalesOrderId");
                     return repository.GetSubOrdersAsync(salesorderId);
 
                 });
@@ -138,8 +137,8 @@ namespace FirstGrphql.GraphQl
         {
             public ProductCategoryType()
             {
-                base.Field(x => x.CategoryId);
-                base.Field(x => x.CategoryName);
+                base.Field(x => x.Id);
+                base.Field(x => x.Name);
                 base.Field(x => x.ProductGroupId);
 
             }
@@ -149,8 +148,8 @@ namespace FirstGrphql.GraphQl
         {
             public SuppliedDivisionType()
             {
-                base.Field(x => x.SuppliedById);
-                base.Field(x => x.SuppliedBy);
+                base.Field(x => x.Id);
+                base.Field(x => x.Name);
 
             }
 
@@ -170,8 +169,8 @@ namespace FirstGrphql.GraphQl
 
             public ProductType()
             {
-                base.Field(x => x.ProductId);
-                base.Field(x => x.ProductName);
+                base.Field(x => x.Id);
+                base.Field(x => x.Name);
                 base.Field(x => x.CategoryId);
             }
 
@@ -205,8 +204,8 @@ namespace FirstGrphql.GraphQl
         {
             public InvoicedByType()
             {
-                base.Field(x => x.InvoicedById);
-                base.Field(x => x.InvoicedByName);
+                base.Field(x => x.Id);
+                base.Field(x => x.Name);
             }
         }
 
@@ -235,8 +234,8 @@ namespace FirstGrphql.GraphQl
         {
             public ProductGroupType()
             {
-                base.Field(x => x.ProductGroupId);
-                base.Field(x => x.ProductGroupName);
+                base.Field(x => x.Id);
+                base.Field(x => x.Name);
             }
 
 
@@ -245,8 +244,8 @@ namespace FirstGrphql.GraphQl
         {
             public OriginType()
             {
-                base.Field(x => x.OriginId);
-                base.Field(x => x.OriginName);
+                base.Field(x => x.Id);
+                base.Field(x => x.Name);
             }
         }
 
@@ -342,8 +341,8 @@ namespace FirstGrphql.GraphQl
         {
             public SubOrderType()
             {
-                base.Field(x => x.SubOrderId);
-                base.Field(x => x.Reference);
+                base.Field(x => x.Id);
+                base.Field(x => x.Name);
                 base.Field(x => x.SalesOrderId);
 
             }

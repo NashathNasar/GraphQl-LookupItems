@@ -140,7 +140,7 @@ namespace FirstGrphql
 
         public Task<List<Product>> GetProductsAsync(int categoryId = 0)
         {
-            if (categoryId > 0)
+            if (categoryId >= 0)
             {
                 return _context.Products
                     .Where(x => x.CategoryId == categoryId)

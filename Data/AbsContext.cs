@@ -57,6 +57,23 @@ namespace FirstGrphql.Data
                 entity.HasKey(x => x.Id);
                 entity.Property(x => x.Id).HasColumnName("SalesOrderId");
                 entity.Property(x => x.Name).HasColumnName("OurOrderRef");
+                entity.Property(x => x.CustomerId).HasColumnName("CustomerId");
+
+            });
+            modelBuilder.Entity<SubOrder>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+                entity.Property(x => x.Id).HasColumnName("SubOrderId");
+                entity.Property(x => x.Name).HasColumnName("Reference");
+                entity.Property(x => x.SalesOrderId).HasColumnName("SalesOrderId");
+            });
+
+            modelBuilder.Entity<ProductGroup>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+                entity.Property(x => x.Id).HasColumnName("ProductGroupId");
+                entity.Property(x => x.Name).HasColumnName("ProductGroupName");
+
 
             });
 
@@ -82,11 +99,39 @@ namespace FirstGrphql.Data
             });
             modelBuilder.Entity<ProductCategory>(entity =>
             {
-                entity.HasKey(x => x.CategoryId);            
+                entity.HasKey(x => x.Id);
+                entity.Property(x => x.Id).HasColumnName("CategoryId");
+                entity.Property(x => x.Name).HasColumnName("CategoryName");
+                entity.Property(x => x.ProductGroupId).HasColumnName("ProductGroupId");
             });
+            modelBuilder.Entity<Origin>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+                entity.Property(x => x.Id).HasColumnName("OriginId");
+                entity.Property(x => x.Name).HasColumnName("OriginName");
+            });
+
+            modelBuilder.Entity<Product>(entity =>
+           {
+               entity.HasKey(x => x.Id);
+               entity.Property(x => x.Id).HasColumnName("ProductId");
+               entity.Property(x => x.Name).HasColumnName("ProductName");
+               entity.Property(x => x.CategoryId).HasColumnName("CategoryId");
+           });
             modelBuilder.Entity<SuppliedDivision>(entity =>
             {
-                entity.HasKey(x => x.SuppliedById);
+                entity.HasKey(x => x.Id);
+                entity.Property(x => x.Id).HasColumnName("SuppliedById");
+                entity.Property(x => x.Name).HasColumnName("SuppliedBy");
+
+            });
+
+            modelBuilder.Entity<InvoicedBy>(entity =>
+            {
+               entity.HasKey(x => x.Id);
+               entity.Property(x => x.Id).HasColumnName("InvoicedById");
+               entity.Property(x => x.Name).HasColumnName("InvoicedByName");
+
             });
             modelBuilder.Entity<Project>(entity =>
             {
@@ -111,6 +156,7 @@ namespace FirstGrphql.Data
     }
 
     #endregion
+    #region Project
     public class Project
     {
         public int Id { get; set; }
@@ -120,6 +166,42 @@ namespace FirstGrphql.Data
         public string Name { get; set; }
 
     }
+
+    #endregion
+    #region SalesOrders
+    public class SalesOrder
+    {
+
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public int CustomerId { get; set; }
+    }
+
+    #endregion
+    #region SubOrder
+    public class SubOrder
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+
+        public int SalesOrderId { get; set; }
+
+    }
+    #endregion
+
+    #region Product Category
+    public class ProductCategory
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int ProductGroupId { get; set; }
+
+    }
+    #endregion
     public class ChargingType
     {
 
@@ -148,9 +230,9 @@ namespace FirstGrphql.Data
     {
 
 
-        public int InvoicedById { get; set; }
+        public int Id { get; set; }
 
-        public string InvoicedByName { get; set; }
+        public string Name { get; set; }
 
 
     }
@@ -172,30 +254,22 @@ namespace FirstGrphql.Data
     {
 
 
-        public int ProductGroupId { get; set; }
-        public string ProductGroupName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
 
 
     }
 
-    public class ProductCategory
-    {
-        public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
 
-
-        public int ProductGroupId { get; set; }
-
-    }
-
+    #region Products
     public class Product
     {
-      public int ProductId { get; set; }
-      public string ProductName { get; set; }
+      public int Id { get; set; }
+      public string Name { get; set; }
       public int CategoryId { get; set; }
 
     }
-
+    #endregion
     public class DeliveryMovementsType
     {
 
@@ -241,11 +315,11 @@ namespace FirstGrphql.Data
     public class Origin
     {
 
-        public int OriginId { get; set; }
+        public int Id { get; set; }
 
-        public string OriginName { get; set; }
+        public string Name { get; set; }
 
-        public string OriginCode { get; set; }
+        
     }
 
     public class InvoicesType
@@ -271,34 +345,14 @@ namespace FirstGrphql.Data
         public string ReceivedBy { get; set; }
     }
 
-    #region SalesOrders
-    public class SalesOrder
-    {
+ 
 
-        public int Id { get; set; }
-
-        public string Name { get; set; }
-
-        public int CustomerId { get; set; }
-    }
-
-    #endregion
-
-    public class SubOrder
-    {
-        public int SubOrderId { get; set; }
-
-        public string Reference { get; set; }
-
-
-        public int SalesOrderId { get; set; }
-
-    }
+   
 
     public class SuppliedDivision
     {
-        public int SuppliedById { get; set; }
-        public string SuppliedBy { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 
     public class Supplier
