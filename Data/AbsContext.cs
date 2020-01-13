@@ -42,7 +42,17 @@ namespace FirstGrphql.Data
         {
             modelBuilder.Entity<DeliveryMovementsType>(entity =>
             {
-                entity.HasKey(x => x.MovementTypeId);
+                entity.HasKey(x => x.Id);
+                entity.Property(x => x.Id).HasColumnName("MovementTypeId");
+                entity.Property(x => x.Name).HasColumnName("MovementType");
+            });
+
+            modelBuilder.Entity<DeliveryType>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+                entity.Property(x => x.Id).HasColumnName("DeliveryTypeId");
+                entity.Property(x => x.Name).HasColumnName("DeliveryTypeName");
+                entity.Property(x => x.MovementTypeId).HasColumnName("MovementTypeId");
             });
 
             modelBuilder.Entity<Customer>(entity => 
@@ -77,6 +87,17 @@ namespace FirstGrphql.Data
 
             });
 
+            modelBuilder.Entity<Division>(entity =>
+            {
+                entity.HasKey(X => X.Id);
+                entity.Property(x => x.Id).HasColumnName("DivisionId");
+                entity.Property(x => x.Name).HasColumnName("DivisionName");
+            });
+
+            modelBuilder.Entity<Origin>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+            });
             modelBuilder.Entity<ReceivedDivison>(entity =>
             {
                 entity.HasKey(x => x.ReceivedById);
@@ -192,7 +213,6 @@ namespace FirstGrphql.Data
 
     }
     #endregion
-
     #region Product Category
     public class ProductCategory
     {
@@ -202,6 +222,7 @@ namespace FirstGrphql.Data
 
     }
     #endregion
+    #region ChardingType
     public class ChargingType
     {
 
@@ -215,29 +236,23 @@ namespace FirstGrphql.Data
 
 
     }
-
+    #endregion
+    #region Division
     public class Division
     {
-
-        public int DivisionId { get; set; }
-
-        public string DivisionName { get; set; }
-
-
-
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
+    #endregion
+    #region InvoicedBy
     public class InvoicedBy
     {
-
-
         public int Id { get; set; }
-
         public string Name { get; set; }
-
-
     }
 
-
+    #endregion
+    #region PaymentTerm
     public class PaymentTerm
     {
 
@@ -249,7 +264,8 @@ namespace FirstGrphql.Data
 
 
     }
-
+    #endregion
+    #region ProductGroup
     public class ProductGroup
     {
 
@@ -260,7 +276,7 @@ namespace FirstGrphql.Data
 
     }
 
-
+    #endregion
     #region Products
     public class Product
     {
@@ -270,17 +286,27 @@ namespace FirstGrphql.Data
 
     }
     #endregion
+    #region DeliveryMovementsType
     public class DeliveryMovementsType
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
 
+    #endregion
+
+    #region Delivery Type
+    public class DeliveryType
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
 
         public int MovementTypeId { get; set; }
 
-        public string MovementType { get; set; }
 
     }
-
-
+    #endregion
     public class ReceiptsMovementType
     {
         public int MovementTypeId { get; set; }
@@ -296,16 +322,7 @@ namespace FirstGrphql.Data
         public int MovementTypeId { get; set; }
     }
 
-    public class DeliveryType
-    {
-        public int DeliveryTypeId { get; set; }
 
-        public string DeliveryTypeName { get; set; }
-
-        public int MovementTypeId { get; set; }
-
-
-    }
 
     public class ProductUnit
     {

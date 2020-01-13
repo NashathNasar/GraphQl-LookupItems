@@ -194,8 +194,8 @@ namespace FirstGrphql.GraphQl
             public DivisionType()
             {
 
-                base.Field(x => x.DivisionId);
-                base.Field(x => x.DivisionName);
+                base.Field(x => x.Id);
+                base.Field(x => x.Name);
 
             }
         }
@@ -264,8 +264,8 @@ namespace FirstGrphql.GraphQl
 
             public DeliveryMovementType()
             {
-                base.Field(x => x.MovementTypeId);
-                base.Field(x => x.MovementType);
+                base.Field(x => x.Id);
+                base.Field(x => x.Name);
 
             }
 
@@ -295,8 +295,8 @@ namespace FirstGrphql.GraphQl
 
             public DeliveryTypeType()
             {
-                base.Field(x => x.DeliveryTypeId);
-                base.Field(x => x.DeliveryTypeName);
+                base.Field(x => x.Id);
+                base.Field(x => x.Name);
                 base.Field(x => x.MovementTypeId);
             }
 

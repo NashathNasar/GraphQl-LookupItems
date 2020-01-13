@@ -129,7 +129,7 @@ namespace FirstGrphql
 
         public Task<List<ProductCategory>> GetProductCategoriesAsync(int productgroupId = 0)
         {
-            if (productgroupId > 0)
+            if (productgroupId >= 0)
             {
                 return _context.ProductCategories
                     .Where(x => x.ProductGroupId == productgroupId)
