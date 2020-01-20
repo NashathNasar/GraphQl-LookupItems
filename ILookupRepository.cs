@@ -9,7 +9,10 @@ namespace FirstGrphql
 {
     public interface ILookupItemRepository
     {
+        Task<Product> AddNewInput(Product product);
+        Task<Product> DeleteNewInput(Product productId);
 
+        Task<object> UpdateInput(Product dbProduct, Product product);
         Task<List<Customer>> GetCustomersAsync();
         Task<List<ChargingType>> GetChargingTypesAsync();
 
@@ -32,18 +35,42 @@ namespace FirstGrphql
         Task<List<Product>> GetProductsAsync(int CategoryId = 0);
         Task<List<ReceiptsMovementType>> GetReceiptsMovementTypesAsync();
         Task<List<DeliveryMovementsType>> GetDeliveryMovementTypesAsync();
+      Product GetById(int productId);
         Task<List<DeliveryType>> GetDeliveryTypesAsync(int MovementTypeId=0);
-        Task<List<ReceiptsType>> GetReceiptsTypesAsync(int MovementTypeId = 0);
+    
+          Task<List<ReceiptsType>> GetReceiptsTypesAsync(int MovementTypeId = 0);
         Task<List<Project>> GetProjectsAsync(int CustomerId=0);
         Task<List<SalesOrder>> GetSalesOrdersAsync(int CustomerId = 0);
-
+        Task<Customer> AddNewInput(Customer newInput);
         Task<List<SubOrder>> GetSubOrdersAsync(int SalesOrderId = 0);
+       
         Task<List<InvoicesType>> GetInvoicesTypesAsync();
     }
 
     public class CustomerRepository : ILookupItemRepository
     {
         private readonly AbsContext _context;
+        public async Task<Product> AddNewInput(Product product)
+        {
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+            return product;
+        }
+        public async Task<Product> DeleteNewInput(Product productId)
+        {
+            _context.Products.Remove(productId);
+            await _context.SaveChangesAsync();
+            return productId;
+        }
+        public async Task<object> UpdateInput(Product dbProduct, Product product)
+        {
+            //dbProduct.Id = product.Id;
+            dbProduct.Name = product.Name;
+            _context.Products.Update(dbProduct);
+            await _context.SaveChangesAsync();
+            return dbProduct;
+        }
+        public Product GetById(int  id) => _context.Products.SingleOrDefault(o => o.Id.Equals(id));
 
         public CustomerRepository(AbsContext context)
         {
@@ -116,7 +143,12 @@ namespace FirstGrphql
             }
             return _context.DeliveryTypes.ToListAsync();
         }
-
+        public async Task<Customer> AddNewInput(Customer newInput)
+        {
+            _context.Customers.Add(newInput);
+            await _context.SaveChangesAsync();
+            return newInput;
+        }
         public Task<List<InvoicesType>> GetInvoicesTypesAsync()
         {
             return _context.InvoiceTypes.ToListAsync();
@@ -202,6 +234,8 @@ namespace FirstGrphql
         {
             return _context.Suppliers.ToListAsync();
         }
+
+      
     }
 
 

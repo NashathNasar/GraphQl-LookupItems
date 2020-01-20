@@ -280,9 +280,13 @@ namespace FirstGrphql.Data
     #region Products
     public class Product
     {
-      public int Id { get; set; }
+      public int  Id { get; set; }
       public string Name { get; set; }
       public int CategoryId { get; set; }
+
+        public string FormName { get; set; }
+
+
 
     }
     #endregion

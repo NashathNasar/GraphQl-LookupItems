@@ -18,9 +18,10 @@
     },
     "FirstGrphql": {
       "commandName": "Project",
+      "launchBrowser": true,
       "launchUrl": "ui/playground",
       "environmentVariables": {
-        "ConnectionStrings:AbsCore": "Data Source=192.168.30.26; Initial Catalog=ABS_CBF2; User Id=sa;pwd=fkt",
+        "ConnectionStrings:AbsCore": "Data Source=192.168.30.31; Initial Catalog=ABS_CBF2; User Id=sa;pwd=fkt",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:51541"

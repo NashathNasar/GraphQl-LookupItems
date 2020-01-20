@@ -15,6 +15,8 @@ namespace FirstGrphql.GraphQl
         public AbsSchema(IServiceProvider services) : base(services)
         {
             Query = services.GetRequiredService<AbsQuery>();
+
+            Mutation = services.GetRequiredService<AbsMutation>();
         }
     }
 
@@ -172,6 +174,11 @@ namespace FirstGrphql.GraphQl
                 base.Field(x => x.Id);
                 base.Field(x => x.Name);
                 base.Field(x => x.CategoryId);
+                base.Field(X => X.FormName);
+                
+
+
+
             }
 
 
